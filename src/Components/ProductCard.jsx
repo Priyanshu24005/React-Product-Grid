@@ -1,4 +1,10 @@
-const ProductCard = ({ elem, del }) => {
+import { useContext } from "react";
+import { MyShop } from "../Context/MyWebsite";
+
+const ProductCard = ({ elem }) => {
+
+  let {setCart} = useContext(MyShop);
+  
   return (
     <div className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group border border-slate-200">
 
@@ -38,12 +44,15 @@ const ProductCard = ({ elem, del }) => {
 
         </div>
 
-        <button
-          onClick={() => del(elem.id)}
-          className="w-full mt-6 bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-xl transition duration-300 active:scale-95"
+          <button
+          className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition duration-300 active:scale-95" 
+          onClick={() => setCart((prev) => [...prev, elem])
+          }
         >
-          Delete Product
+          Add to Cart
         </button>
+       
+        
 
       </div>
     </div>

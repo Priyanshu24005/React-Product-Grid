@@ -1,6 +1,9 @@
-import React from "react";
-import ProductCard from "./ProductCard";
+import React, { useContext } from "react";
+import ProductCard from "./Components/ProductCard";
 import { useState } from "react";
+import Navbar from "./Components/Navbar";
+import Cart from "./Components/Cart";
+import { MyShop } from "./Context/MyWebsite";
 
 const App = () => {
   let [products,setProduct] = useState([
@@ -276,27 +279,13 @@ const App = () => {
     },
   ])
 
-  const deleteFun = (id) => {
-  setProduct(products.filter((elem) => elem.id !== id));
-};
+   let {toggle} = useContext(MyShop);
 
 
   return (
-  <div className="min-h-screen bg-gradient-to-br from-slate-100 via-gray-50 to-slate-200">
-    {/* Header */}
-    <header className="bg-white shadow-md sticky top-0 z-10">
-      <div className="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
-        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-          React Product Store
-        </h1>
-
-        <div className="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold shadow">
-          {products.length} Products
-        </div>
-      </div>
-    </header>
-
-    <div className="max-w-7xl mx-auto px-8 py-10">
+  <div className="min-h-screen min-w-screen from-slate-100 via-gray-50 to-slate-200">
+    <Navbar/>
+    {toggle?<div className="max-w-7xl mx-auto px-8 py-10">
       {products.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-32">
           <h2 className="text-4xl font-bold text-slate-700">
@@ -308,17 +297,19 @@ const App = () => {
           </p>
         </div>
       ) : (
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
           {products.map((elem) => (
             <ProductCard
               key={elem.id}
               elem={elem}
-              del={deleteFun}
             />
           ))}
         </div>
       )}
-    </div>
+    </div>: <Cart/>}
+    
+
+   
   </div>
 );
 };
