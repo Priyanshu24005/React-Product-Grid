@@ -8,5 +8,39 @@ export let Provider = ({ children }) => {
 
   const [cart, setCart] = useState([]);
 
-  return <MyShop.Provider value={{toggle,cart,setCart,setToggle}}>{children}</MyShop.Provider>;
+  let Increament = (id) => {
+  setCart(
+    cart.map((elem) => {
+      if (id === elem.id) {
+        return {
+          ...elem,
+          quantity: elem.quantity + 1,
+        };
+      }
+
+      return elem;
+    })
+  );  
+  };
+
+  let Decreament = (id) => {
+  setCart(
+    cart.map((elem) => {
+      if (id === elem.id) {
+        return {
+          ...elem,
+          quantity: elem.quantity - 1,
+        };
+      }
+
+      return elem;
+    })
+  );  
+  };
+
+  return (
+    <MyShop.Provider value={{ toggle, cart, setCart, setToggle, Increament ,Decreament}}>
+      {children}
+    </MyShop.Provider>
+  );
 };
