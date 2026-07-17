@@ -32,7 +32,6 @@ export let Provider = ({ children }) => {
           quantity: elem.quantity - 1,
         };
       }
-
       return elem;
     })
   );  
