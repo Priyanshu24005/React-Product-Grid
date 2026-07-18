@@ -5,7 +5,7 @@ import Navbar from "./Components/Navbar";
 import Cart from "./Components/Cart";
 import { MyShop } from "./Context/MyWebsite";
 import axios from "axios"
-import { MyStore } from "../../Practice/src/Context/MyConext";
+
 
 const App = () => {
   let [products, setProduct] = useState([]);
